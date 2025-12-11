@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<main class="container mt-4">
+    <h1>Wishlist</h1>
+
+    <!-- Step 8.a: link to /wishlist/new with text "New Wishlist Item" -->
+    <p>
+        <a th:href="@{/wishlist/new}">New Wishlist Item</a>
+    </p>
+
+    <!-- Step 8.b: Bootstrap table, th:each over modelAttribute "wishlist" -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${wishlist}">
+            <td th:text="${item.isbn}"></td>
+            <td th:text="${item.title}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

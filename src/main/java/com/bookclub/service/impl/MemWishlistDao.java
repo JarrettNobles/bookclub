@@ -2,6 +2,7 @@ package com.bookclub.service.impl;
 
 import com.bookclub.model.WishlistItem;
 import com.bookclub.service.dao.WishlistDao;
+import com.bookclub.model.WishlistItem;
 
 import java.util.ArrayList;
 import java.util.List;
