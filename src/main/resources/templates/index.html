@@ -33,6 +33,25 @@
                 </p>
             </div>
         </div>
+
+        <!-- BOOK LIST SECTION (Step 10) -->
+        <div class="row mt-4">
+            <div class="col-md-4 mb-4" th:each="book : ${books}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${book.title}"></h5>
+                        <p class="card-text" th:text="${book.description}"></p>
+                    </div>
+                    <div class="card-footer text-center bg-white border-0 pb-3">
+                        <a th:href="@{/{id}(id=${book.isbn})}"
+                           class="btn btn-secondary">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END BOOK LIST -->
     </section>
 </main>
 
