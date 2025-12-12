@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/wishlist")
 public class WishlistController {
 
-    // 1) Show full wishlist
+    // 1) Show the full wishlist
     @RequestMapping(method = RequestMethod.GET)
     public String showWishlist(Model model) {
         WishlistDao dao = new MemWishlistDao();
@@ -25,7 +25,7 @@ public class WishlistController {
         return "wishlist/list";   // templates/wishlist/list.html
     }
 
-    // 2) Show "New Wishlist Item" form
+    // 2) Show the "New Wishlist Item" form
     @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String wishlistForm(Model model) {
         model.addAttribute("wishlistItem", new WishlistItem());
@@ -44,8 +44,7 @@ public class WishlistController {
         }
 
         // In a real app we'd save to DAO here.
-        // Redirect back to wishlist list page.
-        // NOTE: PDF has a typo "wishlsit"; use the correct path:
+        // Redirect back to the wishlist list page.
         return "redirect:/wishlist";
     }
 }
