@@ -5,13 +5,43 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * Program Name: Book Club Application
+ * File Name: MemBookDao.java
+ * Author: Jarrett Nobles
+ * Description:
+ *   This class provides an in-memory implementation of the
+ *   BookDao interface. It is primarily used for development,
+ *   testing, and demonstration purposes without requiring
+ *   a persistent database.
+ */
+
+/**
+ * The MemBookDao class implements the BookDao interface
+ * using an in-memory collection to store Book objects.
+ */
 public class MemBookDao implements BookDao {
 
+    // ----------------------------------------------
+    // Instance Variables
+    // ----------------------------------------------
+
+    /**
+     * In-memory collection of Book objects.
+     */
     private List<Book> books;
 
+    // ----------------------------------------------
+    // Constructors
+    // ----------------------------------------------
+
+    /**
+     * Constructs a MemBookDao and initializes sample book data.
+     */
     public MemBookDao() {
         books = new ArrayList<>();
 
+        // Initialize sample book records
         books.add(new Book(
                 "1111",
                 "The First Book",
@@ -53,11 +83,26 @@ public class MemBookDao implements BookDao {
         ));
     }
 
+    // ----------------------------------------------
+    // DAO Method Implementations
+    // ----------------------------------------------
+
+    /**
+     * Retrieves all Book records stored in memory.
+     *
+     * @return A list of all Book objects
+     */
     @Override
     public List<Book> list() {
         return books;
     }
 
+    /**
+     * Retrieves a Book by its ISBN.
+     *
+     * @param key The ISBN identifier of the book
+     * @return The matching Book if found; otherwise, null
+     */
     @Override
     public Book find(String key) {
         for (Book b : books) {
@@ -68,4 +113,3 @@ public class MemBookDao implements BookDao {
         return null;
     }
 }
-

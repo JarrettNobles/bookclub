@@ -10,39 +10,84 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.util.List;
 
+/*
+ * Program Name: Book Club Application
+ * File Name: WishlistController.java
+ * Author: Jarrett Nobles
+ * Description:
+ *   This controller manages all wishlist-related web
+ *   interactions, including viewing wishlist items,
+ *   displaying the wishlist form, and handling form
+ *   submissions with validation.
+ */
+
+/**
+ * The WishlistController class handles HTTP requests
+ * related to wishlist functionality within the
+ * Book Club application.
+ */
 @Controller
 @RequestMapping("/wishlist")
 public class WishlistController {
 
-    // 1) Show the full wishlist
+    // ----------------------------------------------
+    // Request Mapping Methods
+    // ----------------------------------------------
+
+    /**
+     * Displays the full wishlist.
+     *
+     * @param model The model used to pass data to the view
+     * @return The wishlist list view
+     */
     @RequestMapping(method = RequestMethod.GET)
     public String showWishlist(Model model) {
+
         WishlistDao dao = new MemWishlistDao();
         List<WishlistItem> wishlist = dao.list();
+
         model.addAttribute("wishlist", wishlist);
-        return "wishlist/list";   // templates/wishlist/list.html
+
+        return "wishlist/list";
     }
 
-    // 2) Show the "New Wishlist Item" form
+    /**
+     * Displays the form for adding a new wishlist item.
+     *
+     * @param model The model used to pass data to the view
+     * @return The wishlist item form view
+     */
     @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String wishlistForm(Model model) {
+
         model.addAttribute("wishlistItem", new WishlistItem());
-        return "wishlist/new";    // templates/wishlist/new.html
+
+        return "wishlist/new";
     }
 
-    // 3) Handle form submission
+    /**
+     * Handles submission of a new wishlist item form.
+     * Validation errors will return the user to the
+     * form view with error messages displayed.
+     *
+     * @param wishlistItem  The wishlist item submitted by the user
+     * @param bindingResult Contains validation results
+     * @return A redirect to the wishlist page if successful,
+     *         or the form view if validation fails
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String addWishlistItem(
             @Valid WishlistItem wishlistItem,
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            // If validation fails, show the form again with errors
+            // Redisplay the form if validation errors are present
             return "wishlist/new";
         }
 
-        // In a real app we'd save to DAO here.
-        // Redirect back to the wishlist list page.
+        // In a production application, the wishlist item
+        // would be persisted using the DAO layer here.
+
         return "redirect:/wishlist";
     }
 }

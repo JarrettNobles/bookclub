@@ -8,12 +8,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
-//home controller
+/*
+ * Program Name: Book Club Application
+ * File Name: HomeController.java
+ * Author: Jarrett Nobles
+ * Description:
+ *   This controller handles all primary navigation routes
+ *   for the Book Club application, including the home page,
+ *   informational pages, and monthly book detail views.
+ */
+
+/**
+ * The HomeController class manages web requests related to
+ * the application's main pages and book listings.
+ */
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
-    //show home page
+    // ----------------------------------------------
+    // Request Mapping Methods
+    // ----------------------------------------------
+
+    /**
+     * Displays the home page and populates the model
+     * with a list of available books.
+     *
+     * @param model The model used to pass data to the view
+     * @return The name of the home page view
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showHome(Model model) {
 
@@ -25,18 +48,36 @@ public class HomeController {
         return "index";
     }
 
-    //show about
+    /**
+     * Displays the About page.
+     *
+     * @param model The model used to pass data to the view
+     * @return The name of the about page view
+     */
     @RequestMapping(method = RequestMethod.GET, path = "/about")
-    public String showAbout(Model model){
+    public String showAbout(Model model) {
         return "about";
     }
 
-    //show contact
+    /**
+     * Displays the Contact page.
+     *
+     * @param model The model used to pass data to the view
+     * @return The name of the contact page view
+     */
     @RequestMapping(method = RequestMethod.GET, path = "/contact")
-    public String showContact(Model model){
+    public String showContact(Model model) {
         return "contact";
     }
 
+    /**
+     * Displays details for the selected monthly book
+     * based on the provided ISBN.
+     *
+     * @param id    The ISBN identifier of the selected book
+     * @param model The model used to pass data to the view
+     * @return The name of the monthly book detail view
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public String getMonthlyBook(@PathVariable("id") String id, Model model) {
 
@@ -47,5 +88,4 @@ public class HomeController {
 
         return "monthly-books/view";
     }
-
-}//end class
+}
