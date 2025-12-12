@@ -1,5 +1,4 @@
 package com.bookclub.web;
-
 import com.bookclub.model.Book;
 import com.bookclub.service.impl.MemBookDao;
 import org.springframework.stereotype.Controller;
@@ -7,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import java.util.List;
 
 //home controller
@@ -26,7 +24,6 @@ public class HomeController {
 
         return "index";
     }
-
 
     //show about
     @RequestMapping(method = RequestMethod.GET, path = "/about")
@@ -50,7 +47,5 @@ public class HomeController {
 
         return "monthly-books/view";
     }
-
-
 
 }//end class

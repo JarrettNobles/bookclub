@@ -1,9 +1,6 @@
 package com.bookclub.service.impl;
-
-
 import com.bookclub.model.Book;
 import com.bookclub.service.dao.BookDao;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,5 +1,4 @@
 package com.bookclub.model;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -36,7 +35,6 @@ public class WishlistItem {
     public void setTitle(String title) {
         this.title = title;
     }
-    // ------------------------------
 
     @Override
     public String toString() {
