@@ -1,7 +1,6 @@
 package com.bookclub.web;
 import com.bookclub.model.WishlistItem;
 import com.bookclub.service.dao.WishlistDao;
-import com.bookclub.service.impl.MemWishlistDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

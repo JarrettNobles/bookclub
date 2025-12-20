@@ -1,7 +1,7 @@
 package com.bookclub.service.dao;
 
 import com.bookclub.model.WishlistItem;
-import com.bookclub.service.GenericDao;
+import com.bookclub.service.GenericCrudDao;
 
 /*
  * Program Name: Book Club Application
@@ -18,7 +18,7 @@ import com.bookclub.service.GenericDao;
  * The WishlistDao interface provides an abstraction layer
  * for performing persistence operations on WishlistItem objects.
  */
-public interface WishlistDao extends GenericDao<WishlistItem, String> {
+public interface WishlistDao extends GenericCrudDao<WishlistItem, String> {
 
     /**
      * Retrieves a WishlistItem by its ISBN.
@@ -28,3 +28,4 @@ public interface WishlistDao extends GenericDao<WishlistItem, String> {
      */
     WishlistItem find(String isbn);
 }
+

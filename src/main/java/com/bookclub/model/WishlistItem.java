@@ -1,14 +1,12 @@
 package com.bookclub.model;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
 
 /*
  * Program Name: Book Club Application
  * File Name: WishlistItem.java
  * Author: Jarrett Nobles
- * Date: MM/DD/YYYY
- * Course: COURSE-ID – Course Name
- * Instructor: Instructor Name
  * Description:
  *   This class represents an item stored in a user's wishlist
  *   within the Book Club application. It contains basic book
@@ -24,6 +22,9 @@ public class WishlistItem {
     // ----------------------------------------------
     // Instance Variables
     // ----------------------------------------------
+
+    @Id
+    private String id;
 
     @NotNull(message = "ISBN is a required field.")
     @NotEmpty(message = "ISBN is a required field.")
@@ -57,6 +58,15 @@ public class WishlistItem {
     // ----------------------------------------------
     // Getter and Setter Methods
     // ----------------------------------------------
+
+    /**
+     * Retrieves the id of the wishlist item.
+     *
+     * @return The wishlist item id
+     */
+    public String getId() {
+        return id;
+    }
 
     /**
      * Retrieves the ISBN of the wishlist item.
@@ -94,10 +104,6 @@ public class WishlistItem {
         this.title = title;
     }
 
-    // ----------------------------------------------
-    // Overridden Methods
-    // ----------------------------------------------
-
     /**
      * Returns a string representation of the WishlistItem object.
      *
@@ -106,9 +112,9 @@ public class WishlistItem {
     @Override
     public String toString() {
         return "WishlistItem{" +
-                "isbn=" + isbn +
+                "id=" + id +
+                ", isbn=" + isbn +
                 ", title=" + title +
                 '}';
     }
 }
-
