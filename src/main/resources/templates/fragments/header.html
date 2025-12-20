@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head></head>
 <body>
 
@@ -34,8 +35,22 @@
                             <a class="nav-link" th:href="@{/wishlist}">Wishlist</a>
                         </li>
 
-
                     </ul>
+
+                    <!-- Step 8: Authenticated user info + logout -->
+                    <ul class="navbar-nav ms-auto" sec:authorize="isAuthenticated()">
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                Logged in as <strong sec:authentication="name"></strong>
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Logout</a>
+                        </li>
+                    </ul>
+                    <!-- End Step 8 -->
+
                 </div>
 
             </div>
@@ -45,3 +60,4 @@
 
 </body>
 </html>
+
