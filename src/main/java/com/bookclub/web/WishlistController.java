@@ -1,6 +1,7 @@
 package com.bookclub.web;
 import com.bookclub.model.WishlistItem;
 import com.bookclub.service.dao.WishlistDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,13 @@ import java.util.List;
 @RequestMapping("/wishlist")
 public class WishlistController {
 
+    private WishlistDao wishlistDao;
+
+    @Autowired
+    private void setWishlistDao(WishlistDao wishlistDao) {
+        this.wishlistDao = wishlistDao;
+    }
+
     // ----------------------------------------------
     // Request Mapping Methods
     // ----------------------------------------------
@@ -42,8 +50,7 @@ public class WishlistController {
     @RequestMapping(method = RequestMethod.GET)
     public String showWishlist(Model model) {
 
-        WishlistDao dao = new MemWishlistDao();
-        List<WishlistItem> wishlist = dao.list();
+        List<WishlistItem> wishlist = wishlistDao.list();
 
         model.addAttribute("wishlist", wishlist);
 
@@ -86,6 +93,8 @@ public class WishlistController {
 
         // In a production application, the wishlist item
         // would be persisted using the DAO layer here.
+
+        wishlistDao.add(wishlistItem); // add the record to MongoDB
 
         return "redirect:/wishlist";
     }
