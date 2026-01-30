@@ -11,38 +11,26 @@
 <div th:insert="fragments/header :: header"></div>
 
 <main class="container mt-4">
-    <h1>Wishlist</h1>
+    <!-- Centered heading -->
+    <div class="text-center">
+        <h2>My Wishlist</h2>
+    </div>
 
-    <!-- Step 8.a: link to /wishlist/new with text "New Wishlist Item" -->
-    <p>
-        <a th:href="@{/wishlist/new}">New Wishlist Item</a>
-    </p>
+    <br />
 
-    <!-- *** STEP 6: REMOVE THE THYMELEAF TABLE BELOW AND REPLACE WITH DIV *** -->
-    <!-- OLD CODE
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ISBN</th>
-            <th>Title</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${wishlist}">
-            <td th:text="${item.isbn}"></td>
-            <td th:text="${item.title}"></td>
-        </tr>
-        </tbody>
-    </table>
-    -->
+    <!-- Centered button for New Wishlist Item -->
+    <div class="text-center">
+        <a th:href="@{/wishlist/new}" class="btn btn-outline-secondary">New Wishlist Item</a>
+    </div>
 
-    <!-- NEW CODE - ADD THIS DIV (JavaScript will populate it) -->
+    <br />
+
+    <!-- This div will be populated by JavaScript with the table -->
     <div id="wishlist"></div>
-    <!-- *** END OF DIV REPLACEMENT *** -->
 
 </main>
 
-<!-- *** STEP 6: ADD JAVASCRIPT CODE HERE (BEFORE </body> TAG) *** -->
+<!-- JavaScript for REST API call and dynamic table generation -->
 <script>
     // HttpClient class for making REST API calls
     class HttpClient {
@@ -62,13 +50,21 @@
 
     // Function to build HTML table from JSON data
     function buildTable(books) {
-        let tableString = '<table class="table"><tr><th>ISBN</th><th>Title</th><th>Functions</th></tr>';
+        // Start with Bootstrap table with proper classes
+        let tableString = '<table class="table table-striped">';
+        tableString += '<thead><tr><th>ISBN</th><th>Title</th><th>Functions</th></tr></thead>';
+        tableString += '<tbody>';
 
+        // Loop through each book and create table rows
         for (let book of books) {
-            tableString += '<tr><td>' + book.isbn + '</td><td>' + book.title + '</td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>';
+            tableString += '<tr>';
+            tableString += '<td>' + book.isbn + '</td>';
+            tableString += '<td>' + book.title + '</td>';
+            tableString += '<td><a href="#" class="text-primary">Edit</a> | <a href="#" class="text-primary">Delete</a></td>';
+            tableString += '</tr>';
         }
 
-        tableString += '</table>';
+        tableString += '</tbody></table>';
 
         return tableString;
     }
@@ -83,7 +79,6 @@
         console.log(e);
     });
 </script>
-<!-- *** END OF STEP 6 JAVASCRIPT *** -->
 
 </body>
 </html>
