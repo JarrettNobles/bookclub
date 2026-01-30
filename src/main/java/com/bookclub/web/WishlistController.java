@@ -47,12 +47,17 @@ public class WishlistController {
      * @param model The model used to pass data to the view
      * @return The wishlist list view
      */
-    @RequestMapping(method = RequestMethod.GET)
+    /**@RequestMapping(method = RequestMethod.GET)
     public String showWishlist(Model model) {
 
         List<WishlistItem> wishlist = wishlistDao.list();
 
         model.addAttribute("wishlist", wishlist);
+
+        return "wishlist/list";
+    }*/
+    @RequestMapping(method = RequestMethod.GET)
+    public String showWishlist() {
 
         return "wishlist/list";
     }
@@ -98,4 +103,6 @@ public class WishlistController {
 
         return "redirect:/wishlist";
     }
+
+
 }
