@@ -34,6 +34,8 @@ public class WishlistItem {
     @NotEmpty(message = "Title is a required field.")
     private String title;
 
+    private String username;
+
     // ----------------------------------------------
     // Constructors
     // ----------------------------------------------
@@ -47,12 +49,14 @@ public class WishlistItem {
     /**
      * Constructs a WishlistItem with required values.
      *
-     * @param isbn  The ISBN identifier for the book
-     * @param title The title of the book
+     * @param isbn     The ISBN identifier for the book
+     * @param title    The title of the book
+     * @param username The username of the wishlist owner
      */
-    public WishlistItem(String isbn, String title) {
+    public WishlistItem(String isbn, String title, String username) {
         this.isbn = isbn;
         this.title = title;
+        this.username = username;
     }
 
     // ----------------------------------------------
@@ -66,6 +70,15 @@ public class WishlistItem {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Sets the id of the wishlist item.
+     *
+     * @param id The id to assign
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -105,6 +118,24 @@ public class WishlistItem {
     }
 
     /**
+     * Retrieves the username of the wishlist owner.
+     *
+     * @return The username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Sets the username of the wishlist owner.
+     *
+     * @param username The username to assign
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
      * Returns a string representation of the WishlistItem object.
      *
      * @return A formatted string containing wishlist item details
@@ -115,6 +146,7 @@ public class WishlistItem {
                 "id=" + id +
                 ", isbn=" + isbn +
                 ", title=" + title +
+                ", username=" + username +
                 '}';
     }
 }

@@ -2,9 +2,11 @@ package com.bookclub.web;
 import com.bookclub.model.WishlistItem;
 import com.bookclub.service.dao.WishlistDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
@@ -89,7 +91,11 @@ public class WishlistController {
     @RequestMapping(method = RequestMethod.POST)
     public String addWishlistItem(
             @Valid WishlistItem wishlistItem,
-            BindingResult bindingResult) {
+            BindingResult bindingResult,
+            Authentication authentication) {
+
+        // Set the username from the authenticated user before validation
+        wishlistItem.setUsername(authentication.getName());
 
         if (bindingResult.hasErrors()) {
             // Redisplay the form if validation errors are present
@@ -104,5 +110,58 @@ public class WishlistController {
         return "redirect:/wishlist";
     }
 
+    /**
+     * Displays a single wishlist item.
+     *
+     * @param id    The ID of the wishlist item to view
+     * @param model The model used to pass data to the view
+     * @return The wishlist item view
+     */
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public String showWishlistItem(@PathVariable String id, Model model) {
+        WishlistItem wishlistItem = wishlistDao.find(id);
+        model.addAttribute("wishlistItem", wishlistItem);
+        return "wishlist/view";
+    }
+
+    /**
+     * Handles update of an existing wishlist item.
+     *
+     * @param wishlistItem  The wishlist item to update
+     * @param bindingResult Contains validation results
+     * @param authentication The authentication object containing user details
+     * @return A redirect to the wishlist page if successful,
+     *         or the view form if validation fails
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "/update")
+    public String updateWishlistItem(
+            @Valid WishlistItem wishlistItem,
+            BindingResult bindingResult,
+            Authentication authentication,
+            Model model) {
+
+        wishlistItem.setUsername(authentication.getName());
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("wishlistItem", wishlistItem);
+            return "wishlist/view";
+        }
+
+        wishlistDao.update(wishlistItem);
+
+        return "redirect:/wishlist";
+    }
+
+    /**
+     * Removes a wishlist item by its ID.
+     *
+     * @param id The ID of the wishlist item to remove
+     * @return A redirect to the wishlist page
+     */
+    @RequestMapping(method = RequestMethod.GET, path = "/delete/{id}")
+    public String removeWishlistItem(@PathVariable String id) {
+        wishlistDao.remove(id);
+        return "redirect:/wishlist";
+    }
 
 }

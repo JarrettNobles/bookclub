@@ -20,6 +20,8 @@ import com.bookclub.service.GenericCrudDao;
  */
 public interface WishlistDao extends GenericCrudDao<WishlistItem, String> {
 
+    boolean remove(String key);
+
     /**
      * Retrieves a WishlistItem by its ISBN.
      *
