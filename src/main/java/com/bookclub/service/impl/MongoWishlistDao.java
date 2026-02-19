@@ -17,8 +17,9 @@ public class MongoWishlistDao implements WishlistDao {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public void add(WishlistItem entity) {
+    public WishlistItem add(WishlistItem entity) {
         mongoTemplate.save(entity);
+        return entity;
     }
 
     @Override

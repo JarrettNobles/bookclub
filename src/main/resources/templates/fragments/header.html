@@ -35,6 +35,11 @@
                             <a class="nav-link" th:href="@{/wishlist}">Wishlist</a>
                         </li>
 
+                        <!-- Restrict the visibility of this link to only admin users. -->
+                        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                            <a href="/monthly-books" class="nav-link" th:href="@{/monthly-books}">Monthly Books</a>
+                        </li>
+
                     </ul>
 
                     <!-- Step 8: Authenticated user info + logout -->

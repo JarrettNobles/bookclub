@@ -3,7 +3,7 @@ package com.bookclub.service;
 import java.util.List;
 
 public interface GenericCrudDao<E, K> {
-    void add(E entity);
+    E add(E entity);
     void update(E entity);
     boolean remove(E entity, K key);
     List<E> list(K key);

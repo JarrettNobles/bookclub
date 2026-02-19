@@ -27,7 +27,7 @@ public interface GenericDao<E, K> {
      *
      * @return A list of all entities
      */
-    List<E> list();
+    List<E> list(K key);
 
     /**
      * Retrieves an entity by its primary key.
