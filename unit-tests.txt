@@ -1,0 +1,87 @@
+Unit Tests - Book Club Application
+Author: Jarrett Nobles
+Assignment: 10.2
+====================================
+
+
+JAVA UNIT TESTS
+---------------
+
+1. BookTest.java
+   Location: src/test/java/com/bookclub/model/BookTest.java
+   Class Under Test: com.bookclub.model.Book
+
+   - testBookConstructorSetsAllFields
+     Creates a Book using the 5-argument constructor and asserts that all
+     five fields (isbn, title, description, infoUrl, numOfPages) are set
+     to the expected values.
+
+   - testBookSettersUpdateFields
+     Creates an empty Book using the no-arg constructor, sets all fields
+     via their setter methods, and asserts that the corresponding getters
+     return the correct values.
+
+2. WishlistItemTest.java
+   Location: src/test/java/com/bookclub/model/WishlistItemTest.java
+   Class Under Test: com.bookclub.model.WishlistItem
+
+   - testWishlistItemConstructorSetsFields
+     Creates a WishlistItem using the 3-argument constructor and asserts
+     that isbn, title, and username are set to the expected values.
+
+   - testWishlistItemSettersUpdateFields
+     Creates an empty WishlistItem using the no-arg constructor, sets all
+     fields (id, isbn, title, username) via their setter methods, and
+     asserts that the corresponding getters return the correct values.
+
+
+WEB UNIT TESTS
+--------------
+
+3. HomeControllerTest.java
+   Location: src/test/java/com/bookclub/web/HomeControllerTest.java
+   Class Under Test: com.bookclub.web.HomeController
+   Annotations: @WebMvcTest, @WithMockUser, @MockBean (BookOfTheMonthDao)
+
+   - testShowAboutReturnsAboutView
+     Performs a GET request to /about with a mock authenticated user and
+     asserts that the response status is 200 OK and the view name is "about".
+
+   - testShowContactReturnsContactView
+     Performs a GET request to /contact with a mock authenticated user and
+     asserts that the response status is 200 OK and the view name is "contact".
+
+4. WishlistControllerTest.java
+   Location: src/test/java/com/bookclub/web/WishlistControllerTest.java
+   Class Under Test: com.bookclub.web.WishlistController
+   Annotations: @WebMvcTest, @WithMockUser, @MockBean (WishlistDao)
+
+   - testShowWishlistReturnsListView
+     Performs a GET request to /wishlist with a mock authenticated user and
+     asserts that the response status is 200 OK and the view name is
+     "wishlist/list".
+
+   - testWishlistFormReturnsNewView
+     Performs a GET request to /wishlist/new with a mock authenticated user
+     and asserts that the response status is 200 OK, the view name is
+     "wishlist/new", and the model contains a "wishlistItem" attribute.
+
+
+TEST RESULTS
+------------
+All 9 tests pass (includes pre-existing contextLoads test).
+
+  com.bookclub.model.BookTest             - Tests run: 2, Failures: 0, Errors: 0
+  com.bookclub.model.WishlistItemTest     - Tests run: 2, Failures: 0, Errors: 0
+  com.bookclub.web.HomeControllerTest     - Tests run: 2, Failures: 0, Errors: 0
+  com.bookclub.web.WishlistControllerTest - Tests run: 2, Failures: 0, Errors: 0
+  com.bookclub.BookclubApplicationTests   - Tests run: 1, Failures: 0, Errors: 0
+
+  Total: Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+  BUILD SUCCESS
+
+
+DEPENDENCIES ADDED
+------------------
+spring-security-test was added to pom.xml (test scope) to enable the
+@WithMockUser annotation used in the web unit tests.
